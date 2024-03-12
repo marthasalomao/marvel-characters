@@ -1,18 +1,38 @@
 import Foundation
 
+protocol CharacterViewModelDelegate: AnyObject {
+    func didFetchCharactersSuccessfully(_ characters: [Character])
+    func didFailToFetchCharacters(with error: Error)
+}
+
 class CharacterViewModel {
     
     private let marvelService = MarvelAPIService()
+    weak var delegate: CharacterViewModelDelegate?
     
-    func fetchMarvelCharacters(completion: @escaping (Result<CharacterDataWrapper, Error>) -> Void) {
-        marvelService.fetchCharacters { data, error, statusCode in
+    var characters: [Character] = []
+    
+    func fetchCharactersIfNeeded() {
+        guard characters.isEmpty else {
+            delegate?.didFetchCharactersSuccessfully(characters)
+            return
+        }
+        
+        // If the list of characters is empty, make an API call to retrieve it
+        fetchCharacters()
+    }
+    
+    func fetchCharacters() {
+        marvelService.fetchCharacters { [weak self] data, error, statusCode in
+            guard let self = self else { return }
+            
             if let error = error {
-                completion(.failure(error))
+                self.delegate?.didFailToFetchCharacters(with: error)
                 return
             }
             
             guard let data = data else {
-                completion(.failure(CustomError.unknown))
+                self.delegate?.didFailToFetchCharacters(with: CustomError.unknown)
                 return
             }
             
@@ -20,9 +40,11 @@ class CharacterViewModel {
                 let decoder = JSONDecoder()
                 let characterResponse = try decoder.decode(CharacterResponse.self, from: data)
                 
-                completion(.success(characterResponse.data))
+                let characters = characterResponse.data.results
+                self.characters = characters // Cache the characters
+                self.delegate?.didFetchCharactersSuccessfully(characters)
             } catch {
-                completion(.failure(error))
+                self.delegate?.didFailToFetchCharacters(with: error)
             }
         }
     }

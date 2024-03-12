@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Marvel
-//
-//  Created by Martha on 11/03/24.
-//
-
 import UIKit
 
 @main

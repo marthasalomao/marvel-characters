@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B14C36EE2BA0CE73006F07C5 /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B14C36ED2BA0CE73006F07C5 /* CharacterCell.swift */; };
 		B16E5B502B9F640300F91D44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B4F2B9F640300F91D44 /* AppDelegate.swift */; };
 		B16E5B522B9F640300F91D44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B512B9F640300F91D44 /* SceneDelegate.swift */; };
 		B16E5B542B9F640300F91D44 /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B532B9F640300F91D44 /* CharacterViewController.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B14C36ED2BA0CE73006F07C5 /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		B16E5B4C2B9F640300F91D44 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B16E5B4F2B9F640300F91D44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B16E5B512B9F640300F91D44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				B16E5B532B9F640300F91D44 /* CharacterViewController.swift */,
+				B14C36ED2BA0CE73006F07C5 /* CharacterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				B16E5B8C2B9F6B3A00F91D44 /* CharactersViewModel.swift in Sources */,
 				B16E5B862B9F69EB00F91D44 /* CustomError.swift in Sources */,
 				B16E5B542B9F640300F91D44 /* CharacterViewController.swift in Sources */,
+				B14C36EE2BA0CE73006F07C5 /* CharacterCell.swift in Sources */,
 				B16E5B8A2B9F6AD800F91D44 /* CharacterModel.swift in Sources */,
 				B16E5B8E2B9F701D00F91D44 /* InternetConnectCheckClass.swift in Sources */,
 				B16E5B842B9F69AE00F91D44 /* Secrets.swift in Sources */,

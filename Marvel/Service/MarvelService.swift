@@ -1,5 +1,3 @@
-// MarvelAPIService.swift
-
 import Foundation
 
 class MarvelAPIService {
