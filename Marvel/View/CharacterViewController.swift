@@ -6,6 +6,7 @@ class CharacterViewController: UIViewController {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search Characters"
         searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.delegate = self
         return searchBar
     }()
     
@@ -18,7 +19,7 @@ class CharacterViewController: UIViewController {
         return tableView
     }()
     
-    let viewModel = CharacterViewModel()
+    private let viewModel = CharacterViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +27,9 @@ class CharacterViewController: UIViewController {
         setupViews()
         setupConstraints()
         viewModel.delegate = self
-        fetchCharacters()
+        viewModel.fetchCharactersIfNeeded()
     }
-        
+    
     private func setupNavigationBar() {
         let titleLabel = UILabel()
         titleLabel.text = "Characters"
@@ -56,16 +57,12 @@ class CharacterViewController: UIViewController {
             charactersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-        
-    private func fetchCharacters() {
-        viewModel.fetchCharacters()
-    }
 }
 
 extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.characters.count
+        return viewModel.filteredCharacters.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,21 +73,30 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as? CharacterCell else {
             return UITableViewCell()
         }
-        let character = viewModel.characters[indexPath.row]
+        let character = viewModel.filteredCharacters[indexPath.row]
         cell.configure(with: character)
         return cell
     }
 }
 
 extension CharacterViewController: CharacterViewModelDelegate {
+    func didUpdateFilteredCharacters(_ characters: [Character]) {
+        viewModel.filteredCharacters = characters
+        charactersTableView.reloadData()
+    }
+    
     func didFetchCharactersSuccessfully(_ characters: [Character]) {
-        self.viewModel.characters = characters
-        self.charactersTableView.reloadData()
+        viewModel.allCharacters = characters
+        viewModel.searchCharacters(with: searchBar.text ?? "")
     }
     
     func didFailToFetchCharacters(with error: Error) {
         print("Failed to fetch characters: \(error)")
     }
-    
 }
 
+extension CharacterViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.searchCharacters(with: searchText)
+    }
+}
