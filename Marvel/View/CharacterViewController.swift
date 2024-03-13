@@ -77,6 +77,17 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: character)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let character = viewModel.filteredCharacters[indexPath.row]
+        showCharacterDetails(for: character)
+    }
+    
+    private func showCharacterDetails(for character: Character) {
+        let characterDetailVC = CharacterDetailViewController()
+        characterDetailVC.character = character
+        navigationController?.pushViewController(characterDetailVC, animated: true)
+    }
 }
 
 extension CharacterViewController: CharacterViewModelDelegate {
