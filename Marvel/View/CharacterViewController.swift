@@ -23,20 +23,10 @@ class CharacterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
         setupViews()
         setupConstraints()
         viewModel.delegate = self
         viewModel.fetchCharactersIfNeeded()
-    }
-    
-    private func setupNavigationBar() {
-        let titleLabel = UILabel()
-        titleLabel.text = "Characters"
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        titleLabel.sizeToFit()
-        navigationItem.titleView = titleLabel
     }
     
     private func setupViews() {
@@ -86,8 +76,10 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
     private func showCharacterDetails(for character: Character) {
         let characterDetailVC = CharacterDetailViewController()
         characterDetailVC.character = character
+        characterDetailVC.title = character.name
         navigationController?.pushViewController(characterDetailVC, animated: true)
     }
+
 }
 
 extension CharacterViewController: CharacterViewModelDelegate {

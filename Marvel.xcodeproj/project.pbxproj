@@ -24,6 +24,8 @@
 		B16E5B8E2B9F701D00F91D44 /* InternetConnectCheckClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B8D2B9F701D00F91D44 /* InternetConnectCheckClass.swift */; };
 		B16E5B912B9F707400F91D44 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B902B9F707400F91D44 /* String+MD5.swift */; };
 		B1F03C4E2BA1268B0028DA12 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */; };
+		B1F03C502BA271CC0028DA12 /* FavoriteCharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */; };
+		B1F03C522BA294680028DA12 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C512BA294680028DA12 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		B16E5B8D2B9F701D00F91D44 /* InternetConnectCheckClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectCheckClass.swift; sourceTree = "<group>"; };
 		B16E5B902B9F707400F91D44 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
 		B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharactersViewController.swift; sourceTree = "<group>"; };
+		B1F03C512BA294680028DA12 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 		B16E5B432B9F640300F91D44 = {
 			isa = PBXGroup;
 			children = (
+				B1F03C512BA294680028DA12 /* MainTabBarController.swift */,
 				B16E5B4E2B9F640300F91D44 /* Marvel */,
 				B16E5B832B9F69AE00F91D44 /* Secrets.swift */,
 				B16E5B652B9F640400F91D44 /* MarvelTests */,
@@ -116,9 +121,9 @@
 		B16E5B4E2B9F640300F91D44 /* Marvel */ = {
 			isa = PBXGroup;
 			children = (
+				B16E5B7F2B9F65BC00F91D44 /* Model */,
 				B16E5B802B9F65CE00F91D44 /* View */,
 				B16E5B812B9F65D900F91D44 /* ViewModel */,
-				B16E5B7F2B9F65BC00F91D44 /* Model */,
 				B16E5B822B9F65E700F91D44 /* Service */,
 				B16E5B8F2B9F705600F91D44 /* Extensions */,
 				B16E5B4F2B9F640300F91D44 /* AppDelegate.swift */,
@@ -158,9 +163,10 @@
 		B16E5B802B9F65CE00F91D44 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B16E5B532B9F640300F91D44 /* CharacterViewController.swift */,
 				B14C36ED2BA0CE73006F07C5 /* CharacterCell.swift */,
 				B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */,
+				B16E5B532B9F640300F91D44 /* CharacterViewController.swift */,
+				B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B16E5B8C2B9F6B3A00F91D44 /* CharactersViewModel.swift in Sources */,
+				B1F03C502BA271CC0028DA12 /* FavoriteCharactersViewController.swift in Sources */,
 				B1F03C4E2BA1268B0028DA12 /* CharacterDetailViewController.swift in Sources */,
 				B16E5B862B9F69EB00F91D44 /* CustomError.swift in Sources */,
 				B16E5B542B9F640300F91D44 /* CharacterViewController.swift in Sources */,
@@ -330,6 +337,7 @@
 				B16E5B8E2B9F701D00F91D44 /* InternetConnectCheckClass.swift in Sources */,
 				B16E5B842B9F69AE00F91D44 /* Secrets.swift in Sources */,
 				B16E5B502B9F640300F91D44 /* AppDelegate.swift in Sources */,
+				B1F03C522BA294680028DA12 /* MainTabBarController.swift in Sources */,
 				B16E5B912B9F707400F91D44 /* String+MD5.swift in Sources */,
 				B16E5B882B9F6A8000F91D44 /* MarvelService.swift in Sources */,
 				B16E5B522B9F640300F91D44 /* SceneDelegate.swift in Sources */,
