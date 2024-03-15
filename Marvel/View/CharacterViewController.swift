@@ -27,6 +27,7 @@ class CharacterViewController: UIViewController {
         setupConstraints()
         viewModel.delegate = self
         viewModel.fetchCharactersIfNeeded()
+        title = "Characters"
     }
     
     private func setupViews() {

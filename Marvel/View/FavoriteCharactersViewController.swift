@@ -5,6 +5,7 @@ class FavoriteCharactersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        title = "Favorites"
         
         let messageLabel = UILabel()
         messageLabel.text = "No favorite characters yet."
