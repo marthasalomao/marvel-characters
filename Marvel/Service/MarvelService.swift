@@ -1,5 +1,9 @@
 import Foundation
 
+protocol MarvelAPIServiceProtocol {
+    func fetchCharacters(completion: @escaping (Data?, Error?, Int?) -> Void)
+}
+
 class MarvelAPIService {
     
     private let baseURL = "https://gateway.marvel.com/v1/public/"

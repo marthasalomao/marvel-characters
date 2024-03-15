@@ -23,6 +23,7 @@
 		B16E5B8C2B9F6B3A00F91D44 /* CharactersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B8B2B9F6B3A00F91D44 /* CharactersViewModel.swift */; };
 		B16E5B8E2B9F701D00F91D44 /* InternetConnectCheckClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B8D2B9F701D00F91D44 /* InternetConnectCheckClass.swift */; };
 		B16E5B912B9F707400F91D44 /* String+MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = B16E5B902B9F707400F91D44 /* String+MD5.swift */; };
+		B18C1A532BA489E6006302AE /* MockMarvelAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18C1A522BA489E6006302AE /* MockMarvelAPIService.swift */; };
 		B1F03C4E2BA1268B0028DA12 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */; };
 		B1F03C502BA271CC0028DA12 /* FavoriteCharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */; };
 		B1F03C522BA294680028DA12 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F03C512BA294680028DA12 /* MainTabBarController.swift */; };
@@ -66,6 +67,7 @@
 		B16E5B8B2B9F6B3A00F91D44 /* CharactersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModel.swift; sourceTree = "<group>"; };
 		B16E5B8D2B9F701D00F91D44 /* InternetConnectCheckClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectCheckClass.swift; sourceTree = "<group>"; };
 		B16E5B902B9F707400F91D44 /* String+MD5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+MD5.swift"; sourceTree = "<group>"; };
+		B18C1A522BA489E6006302AE /* MockMarvelAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMarvelAPIService.swift; sourceTree = "<group>"; };
 		B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
 		B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCharactersViewController.swift; sourceTree = "<group>"; };
 		B1F03C512BA294680028DA12 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				B16E5B662B9F640400F91D44 /* MarvelTests.swift */,
+				B18C1A522BA489E6006302AE /* MockMarvelAPIService.swift */,
 			);
 			path = MarvelTests;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B16E5B672B9F640400F91D44 /* MarvelTests.swift in Sources */,
+				B18C1A532BA489E6006302AE /* MockMarvelAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
