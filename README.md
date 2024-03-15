@@ -46,7 +46,7 @@ Nenhuma dependência de terceiros ou CocoaPods é necessária para executar este
 
 API da Marvel
 
-O aplicativo busca dados dos personagens na [API da Marvel Comics](https://developer.marvel.com/docs). Ele utiliza o endpoint /characters para obter informações sobre os personagens da Marvel. 
+O aplicativo busca dados dos personagens na [API da Marvel Comics](https://developer.marvel.com/docs). Ele utiliza o endpoint ```/characters``` para obter informações sobre os personagens da Marvel. 
 
 ## Acessibilidade
 Recursos de acessibilidade foram implementados para garantir uma ótima experiência do usuário para todos os usuários. Elementos-chave, como itens da barra de guias e títulos de tela, foram rotulados adequadamente para acessibilidade.
