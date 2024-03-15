@@ -101,7 +101,6 @@
 		B16E5B432B9F640300F91D44 = {
 			isa = PBXGroup;
 			children = (
-				B1F03C512BA294680028DA12 /* MainTabBarController.swift */,
 				B16E5B4E2B9F640300F91D44 /* Marvel */,
 				B16E5B832B9F69AE00F91D44 /* Secrets.swift */,
 				B16E5B652B9F640400F91D44 /* MarvelTests */,
@@ -170,6 +169,7 @@
 				B1F03C4D2BA1268B0028DA12 /* CharacterDetailViewController.swift */,
 				B16E5B532B9F640300F91D44 /* CharacterViewController.swift */,
 				B1F03C4F2BA271CC0028DA12 /* FavoriteCharactersViewController.swift */,
+				B1F03C512BA294680028DA12 /* MainTabBarController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

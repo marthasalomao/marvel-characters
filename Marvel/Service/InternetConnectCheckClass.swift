@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 import SystemConfiguration
 
 class InternetConnectCheckClass {
@@ -23,5 +23,19 @@ class InternetConnectCheckClass {
         let isReachable = flags.contains(.reachable)
         let needsConnection = flags.contains(.connectionRequired)
         return (isReachable && !needsConnection)
+    }
+    
+    class func handleNoInternetConnection(from viewController: UIViewController, retryAction: (() -> Void)?) {
+        guard !isConnectedToNetwork() else { return }
+        
+        let alert = UIAlertController(title: "No Internet Connection",
+                                      message: "Please check your connection and try again.",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Retry", style: .default) { _ in
+            retryAction?()
+        })
+        
+        viewController.present(alert, animated: true, completion: nil)
     }
 }
