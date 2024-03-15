@@ -10,13 +10,18 @@ class CharacterViewController: UIViewController {
         return searchBar
     }()
     
-    private lazy var charactersTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(CharacterCell.self, forCellReuseIdentifier: CharacterCell.reuseIdentifier)
-        return tableView
+    private lazy var charactersCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifier)
+        collectionView.backgroundColor = .white
+        return collectionView
     }()
     
     private let viewModel = CharacterViewModel()
@@ -33,7 +38,7 @@ class CharacterViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         view.addSubview(searchBar)
-        view.addSubview(charactersTableView)
+        view.addSubview(charactersCollectionView)
     }
     
     private func setupConstraints() {
@@ -42,35 +47,36 @@ class CharacterViewController: UIViewController {
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            charactersTableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-            charactersTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            charactersTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            charactersTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            charactersCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
 
-extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
+extension CharacterViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.filteredCharacters.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 15) / 2 // Assuming 30 is the total spacing between cells
+        return CGSize(width: width, height: 200)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as? CharacterCell else {
-            return UITableViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as? CharacterCell else {
+            return UICollectionViewCell()
         }
-        let character = viewModel.filteredCharacters[indexPath.row]
+        let character = viewModel.filteredCharacters[indexPath.item]
         cell.configure(with: character)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let character = viewModel.filteredCharacters[indexPath.row]
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let character = viewModel.filteredCharacters[indexPath.item]
         showCharacterDetails(for: character)
     }
     
@@ -80,13 +86,12 @@ extension CharacterViewController: UITableViewDelegate, UITableViewDataSource {
         characterDetailVC.title = character.name
         navigationController?.pushViewController(characterDetailVC, animated: true)
     }
-
 }
 
 extension CharacterViewController: CharacterViewModelDelegate {
     func didUpdateFilteredCharacters(_ characters: [Character]) {
         viewModel.filteredCharacters = characters
-        charactersTableView.reloadData()
+        charactersCollectionView.reloadData()
     }
     
     func didFetchCharactersSuccessfully(_ characters: [Character]) {

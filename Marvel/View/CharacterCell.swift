@@ -1,14 +1,22 @@
 import UIKit
 
-class CharacterCell: UITableViewCell {
+class CharacterCell: UICollectionViewCell {
     static let reuseIdentifier = "CharacterCell"
     
     private let characterImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    private let labelBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let nameLabel: UILabel = {
@@ -27,8 +35,8 @@ class CharacterCell: UITableViewCell {
         return button
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setupViews()
         setupConstraints()
@@ -40,7 +48,8 @@ class CharacterCell: UITableViewCell {
     
     private func setupViews() {
         addSubview(characterImageView)
-        addSubview(nameLabel)
+        addSubview(labelBackgroundView)
+        labelBackgroundView.addSubview(nameLabel)
         addSubview(favoriteButton)
     }
     
@@ -51,12 +60,17 @@ class CharacterCell: UITableViewCell {
             characterImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             characterImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            nameLabel.leadingAnchor.constraint(equalTo: characterImageView.leadingAnchor, constant: 16),
-            nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 16),
-            nameLabel.trailingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: -16),
+            labelBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            labelBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            labelBackgroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            labelBackgroundView.heightAnchor.constraint(equalToConstant: 40),
             
-            favoriteButton.trailingAnchor.constraint(equalTo: characterImageView.trailingAnchor, constant: -16),
-            favoriteButton.bottomAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: -16),
+            nameLabel.leadingAnchor.constraint(equalTo: labelBackgroundView.leadingAnchor, constant: 16),
+            nameLabel.topAnchor.constraint(equalTo: labelBackgroundView.topAnchor, constant: 8),
+            nameLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -16),
+            
+            favoriteButton.trailingAnchor.constraint(equalTo: labelBackgroundView.trailingAnchor, constant: -16),
+            favoriteButton.centerYAnchor.constraint(equalTo: labelBackgroundView.centerYAnchor),
             favoriteButton.widthAnchor.constraint(equalToConstant: 24),
             favoriteButton.heightAnchor.constraint(equalToConstant: 24)
         ])
@@ -67,7 +81,7 @@ class CharacterCell: UITableViewCell {
         
         let imageURLString = character.thumbnail.path + "." + character.thumbnail.fileExtension
         guard let imageURL = URL(string: imageURLString) else {
-            print("URL inválida para a imagem do personagem")
+            print("Invalid URL for character image")
             return
         }
         
@@ -78,7 +92,7 @@ class CharacterCell: UITableViewCell {
                     self.characterImageView.image = image
                 }
             } else {
-                print("Falha ao carregar a imagem do personagem")
+                print("Failed to load character image")
             }
         }
     }

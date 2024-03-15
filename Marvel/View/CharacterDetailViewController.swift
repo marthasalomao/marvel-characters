@@ -7,7 +7,7 @@ class CharacterDetailViewController: UIViewController {
     
     private lazy var characterImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -80,8 +80,10 @@ class CharacterDetailViewController: UIViewController {
             comicsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             comicsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             
-            favoriteButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            favoriteButton.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor),
+            favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 30),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -113,7 +115,7 @@ class CharacterDetailViewController: UIViewController {
     @objc private func favoriteButtonTapped() {
         isFavorite.toggle()
         let imageName = isFavorite ? "star.fill" : "star"
-        favoriteButton.setImage(UIImage(systemName: imageName), for: .normal)
+        favoriteButton.setImage(UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate), for: .normal)
         // TODO: Implement favorite button action
     }
 }
