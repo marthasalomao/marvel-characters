@@ -11,6 +11,10 @@ class CharacterViewModel {
     private let marvelService = MarvelAPIService()
     weak var delegate: CharacterViewModelDelegate?
     
+    private var currentPage = 0
+    private var totalCharacters = 0
+    private var isFetching = false
+    
     var allCharacters: [Character] = []
     var filteredCharacters: [Character] = []
     
@@ -24,8 +28,12 @@ class CharacterViewModel {
     }
     
     private func fetchCharacters() {
-        marvelService.fetchCharacters { [weak self] data, error, statusCode in
+        isFetching = true
+        let pageSize = 20
+        marvelService.fetchCharacters(offset: currentPage * pageSize) { [weak self] data, error, statusCode in
             guard let self = self else { return }
+            
+            self.isFetching = false
             
             if let error = error {
                 self.delegate?.didFailToFetchCharacters(with: error)
@@ -41,12 +49,23 @@ class CharacterViewModel {
                 let decoder = JSONDecoder()
                 let characterResponse = try decoder.decode(CharacterResponse.self, from: data)
                 
+                self.totalCharacters = characterResponse.data.total
+                
                 let characters = characterResponse.data.results
-                self.allCharacters = characters
+                self.allCharacters += characters
                 self.delegate?.didFetchCharactersSuccessfully(characters)
             } catch {
                 self.delegate?.didFailToFetchCharacters(with: error)
             }
+        }
+    }
+    
+    func fetchNextPage() {
+        guard !isFetching else { return }
+        
+        currentPage += 1
+        if allCharacters.count < totalCharacters {
+            fetchCharacters()
         }
     }
     

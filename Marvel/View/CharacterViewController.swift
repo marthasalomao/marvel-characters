@@ -25,6 +25,7 @@ class CharacterViewController: UIViewController {
     }()
     
     private let viewModel = CharacterViewModel()
+    private var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +81,17 @@ extension CharacterViewController: UICollectionViewDelegate, UICollectionViewDat
         showCharacterDetails(for: character)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            if !isLoading {
+                isLoading = true
+                viewModel.fetchNextPage()
+            }
+        }
+    }
+    
     private func showCharacterDetails(for character: Character) {
         let characterDetailVC = CharacterDetailViewController()
         characterDetailVC.character = character
@@ -90,13 +102,20 @@ extension CharacterViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension CharacterViewController: CharacterViewModelDelegate {
     func didUpdateFilteredCharacters(_ characters: [Character]) {
-        viewModel.filteredCharacters = characters
-        charactersCollectionView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.filteredCharacters = characters
+            self.charactersCollectionView.reloadData()
+        }
     }
     
     func didFetchCharactersSuccessfully(_ characters: [Character]) {
-        viewModel.allCharacters = characters
-        viewModel.searchCharacters(with: searchBar.text ?? "")
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.allCharacters += characters
+            self.viewModel.searchCharacters(with: self.searchBar.text ?? "")
+            self.isLoading = false
+        }
     }
     
     func didFailToFetchCharacters(with error: Error) {
