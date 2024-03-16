@@ -34,6 +34,16 @@ O projeto utiliza a arquitetura MVVM (Model-View-ViewModel) para organizar o có
 ```String+MD5Hash```: Fornece uma extensão para calcular o hash MD5 de uma string, usado na autenticação com a API da Marvel.
 ```String+LevenshteinDistance```: Fornece uma extensão para calcular a distância de Levenshtein entre duas strings, usado para classificar os resultados da pesquisa por proximidade de correspondência.
 
+## Paginação
+
+A API da Marvel utiliza paginação para lidar com grandes conjuntos de dados, como personagens e quadrinhos, melhorando a eficiência e escalabilidade das solicitações. Portanto, ajustamos nosso aplicativo para implementar a paginação, garantindo uma experiência de usuário fluida ao carregar uma lista contínua de personagens com scroll infinito.
+
+- Definição do Tamanho da Página: Foi introduzido um parâmetro ```offset``` no ```MarvelAPIService``` para determinar a posição a partir da qual os personagens seriam buscados. O tamanho da página é fixado em 20, mas pode ser ajustado conforme necessário.
+- Rastreamento do Estado de Carregamento: Foi adicionada uma propriedade ```isFetching``` no ```CharacterViewModel``` para rastrear se a busca dos personagens está em andamento, evitando múltiplas solicitações simultâneas.
+- Ajuste na Função de Busca de Personagens: A função ```fetchCharacters``` no ```CharacterViewModel``` foi modificada para aceitar um parâmetro ```offset```, indicando a posição a partir da qual os personagens devem ser buscados.
+- Chamada de Busca de Personagens com Paginação: No método ```fetchCharactersIfNeeded``` do ```CharacterViewModel```, foi ajustada a chamada para ```marvelService.fetchCharacters``` para incluir o ```offset```, calculado multiplicando o número da página atual pelo tamanho da página.
+- Atualização da Interface do Usuário: Após o sucesso na busca dos personagens, é realizada a atualização da lista de personagens e a recarga da coleção no ```CharacterViewController```. Além disso, foi ajustada a função ```didUpdateFilteredCharacters``` para recarregar a coleção após a atualização da lista de personagens.
+
 ## Uso
 
 1. Clone o repositório.
