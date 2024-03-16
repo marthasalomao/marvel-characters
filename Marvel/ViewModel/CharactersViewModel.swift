@@ -73,14 +73,23 @@ class CharacterViewModel {
         if searchText.isEmpty {
             delegate?.didUpdateFilteredCharacters(allCharacters)
         } else {
+            // Create a temporary set to store unique character IDs
+            var uniqueCharacterIDs = Set<Int>()
+            
+            // Filter characters in the original array and add only unique characters to the filtered array
             filteredCharacters = allCharacters.filter { character in
-                return character.name.lowercased().contains(searchText.lowercased())
+                let containsSearchText = character.name.lowercased().contains(searchText.lowercased())
+                let isUnique = uniqueCharacterIDs.insert(character.id).inserted
+                return containsSearchText && isUnique
             }.sorted { character1, character2 in
                 let distance1 = character1.name.lowercased().levenshteinDistance(to: searchText.lowercased())
                 let distance2 = character2.name.lowercased().levenshteinDistance(to: searchText.lowercased())
                 return distance1 < distance2
             }
+            
+            // Notify the delegate with the filtered characters
             delegate?.didUpdateFilteredCharacters(filteredCharacters)
         }
     }
+    
 }
