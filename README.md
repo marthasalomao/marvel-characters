@@ -11,10 +11,7 @@ Este aplicativo iOS permite aos usuários navegar pelos personagens da Marvel, v
 
 ## Screenshots
 
-<div style="display: flex;">
-  <!-- Imagem -->
-  <img width="100%" height="auto" src="https://github.com/marthasalomao/marvel-characters/assets/64446599/b2dcdf33-265e-47b8-b6ab-edccee86142f)"/>
-</div>
+![marvel ](https://github.com/marthasalomao/marvel-characters/assets/64446599/9054d6fd-472d-4b27-9438-f88c9a15d424)
 
 
 ## Tecnologias Utilizadas
@@ -60,5 +57,15 @@ O aplicativo busca dados dos personagens na [API da Marvel Comics](https://devel
 
 ## Acessibilidade
 Recursos de acessibilidade foram implementados para garantir uma ótima experiência do usuário para todos os usuários. Elementos-chave, como itens da barra de guias e títulos de tela, foram rotulados adequadamente para acessibilidade.
+
+## Próximos Passos 
+
+- Corrigir Pesquisa de Personagens: Permitir que os usuários pesquisem personagens independentemente de terem sido carregados por scroll.
+
+- Finalizar Feature de Favoritar Personagens: Concluir a implementação para que os usuários possam marcar e acessar seus personagens favoritos.
+
+- Otimizar Carregamento da Lista de Personagens: Melhorar o desempenho do aplicativo ao carregar e exibir grandes listas de personagens, garantindo uma experiência de usuário mais rápida e eficiente.
+  
+✦ Estas são as próximas etapas para aprimorar o aplicativo e proporcionar ainda mais aprendizado aos usuários que explorarem este repositório. 
 
 ---
